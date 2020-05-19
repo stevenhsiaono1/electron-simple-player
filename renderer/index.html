@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Player</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="../resources/customized.css"> -->
+  </head>
+  
+  <body>
+
+    <div class="container mt-4">
+        <h1>NZXT Player</h1>
+        <button type="button" id="add-music-btn" class="btn btn-primary btn-lg btn-block mt-4">
+            Add Music to List
+        </button>
+    </div>
+
+    <!-- 通常項目都是用script src = XXX，electron也沒有問題，但因為可以直接吃nodeJS>>  改用以下 -->
+    <script>
+        require('./index.js')
+    </script>
+
+  </body>
+</html>

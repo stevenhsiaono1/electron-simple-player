@@ -1,0 +1,15 @@
+1. BrowserWindow > rederer process (創建窗口)
+2. 避免重開>  可安裝nodemon >> npm install nodemon --save-dev (開發用)
+3. 此時就可以將package.json >>
+  "scripts": {
+    "start": "electron ."   >> 改為 "nodemon --watch main.js --exec electron ."   (electron .不需要單引號)
+  },
+
+  如此只要main.js有修正就會自動執行(因watch main.js)
+4. BrowserWindow的API文件可以看:
+https://www.electronjs.org/docs/api/browser-window
+5. electron process之間的通訊方式> IPC (interprocess communication)和chromium完全一致
+6. 測試通訊:
+   如註解
+
+7. 開始撰寫撥放器
