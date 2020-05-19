@@ -22,3 +22,21 @@ https://ithelp.ithome.com.tw/articles/10200658
 https://www.electronjs.org/docs/api/browser-window#%E4%BC%98%E9%9B%85%E5%9C%B0%E6%98%BE%E7%A4%BA%E7%AA%97%E5%8F%A3
 採用ready-to-show
 也就是改為ready-to-show事件完成後再來顯示窗口就不會閃爍
+12. document.getElementById 可以寫個helper改用$取代然後export
+13. showOpenDialog
+https://www.electronjs.org/docs/api/dialog
+(留意  以為promise寫法>>  用.then)
+14.
+path.basename:指返回檔名沒有全路徑!!
+15. 數據持久化  (可持續使用)
+本sample 利用文件~  使用electron-store!  (預期可以測試，添加完後  關視窗下次還是會有該檔案)
+
+
+
+
+************
+測試想法:
+1. 先測main/renderer觸發   關閉
+2. 新增一圖‧ 撥放 , 有跳出圖檔視窗> 關閉移除
+3. 新增一聲音 撥放 (圖案要改)  聲音不等於00:00
+4. 測試檔名儲存，新增圖或聲音>   關閉視窗重開>>  看是否還在並能持續播檔

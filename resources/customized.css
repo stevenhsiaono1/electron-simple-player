@@ -1,10 +1,82 @@
-.btn-primary{
+/* .btn-primary{
     background-color: #51007A;
     border-color: #51007A;
-}
+} */
 
 /* .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open>.dropdown-toggle.btn-primary {
     color:blueviolet;
     background-color: blueviolet;
     border-color: #285e8e; 
 } */
+
+
+.btn-primary {
+  color: #fff;
+  background-color: #51007A;
+  border-color: #51007A;
+}
+
+.btn-primary:hover {
+  color: #fff;
+  background-color: blueviolet;   
+   /* #51007A; */
+  border-color: #51007A;
+}
+
+.btn-primary:focus, .btn-primary.focus {
+  color: #fff;
+  background-color: #51007A;
+  border-color: #51007A;
+  box-shadow: 0 0 0 0.2rem #51007A;
+}
+
+.btn-primary.disabled, .btn-primary:disabled {
+  color: #fff;
+  background-color: #51007A;
+  border-color: #51007A;
+}
+
+.btn-primary:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled).active,
+.show > .btn-primary.dropdown-toggle {
+  color: #fff;
+  background-color: #51007A;
+  border-color: #51007A;
+}
+
+.btn-primary:not(:disabled):not(.disabled):active:focus, .btn-primary:not(:disabled):not(.disabled).active:focus,
+.show > .btn-primary.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0.2rem #51007A;
+}
+
+
+.btn-outline-primary {
+    color: #51007A;
+    border-color: #51007A;
+  }
+  
+  .btn-outline-primary:hover {
+    color: #fff;
+    background-color: #51007A;
+    border-color: #51007A;
+  }
+  
+  .btn-outline-primary:focus, .btn-outline-primary.focus {
+    box-shadow: 0 0 0 0.2rem #51007A;
+  }
+  
+  .btn-outline-primary.disabled, .btn-outline-primary:disabled {
+    color: #51007A;
+    background-color: transparent;
+  }
+  
+  .btn-outline-primary:not(:disabled):not(.disabled):active, .btn-outline-primary:not(:disabled):not(.disabled).active,
+  .show > .btn-outline-primary.dropdown-toggle {
+    color: #fff;
+    background-color: #51007A;
+    border-color: #51007A;
+  }
+  
+  .btn-outline-primary:not(:disabled):not(.disabled):active:focus, .btn-outline-primary:not(:disabled):not(.disabled).active:focus,
+  .show > .btn-outline-primary.dropdown-toggle:focus {
+    box-shadow: 0 0 0 0.2rem #51007A;
+  }

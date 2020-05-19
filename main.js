@@ -1,4 +1,4 @@
-const {app, BrowserWindow, ipcMain} = require('electron')
+const {app, BrowserWindow, ipcMain, dialog} = require('electron')
 
 // 封裝原本兩個BrowserWindow
 class AppWindow extends BrowserWindow{
@@ -27,7 +27,6 @@ class AppWindow extends BrowserWindow{
 }
 
 
-
 app.on('ready', () =>{
     // 下方mainWindow改為以下
     const mainWindow = new AppWindow({},'./renderer/index.html')
@@ -48,11 +47,10 @@ app.on('ready', () =>{
 
         // 以下監聽到後創建的window也改用封裝
         const addWindow = new AppWindow({
-                width: 500,
+                width: 600,
                 height: 400,
                 parent:mainWindow
             }, './renderer/add.html')
-
 
         // const addWindow = new BrowserWindow({
         //     width: 500,
@@ -63,5 +61,18 @@ app.on('ready', () =>{
         //     parent: mainWindow
         // });
         // addWindow.loadFile('./renderer/add.html');
+    })
+
+    ipcMain.on('open-music-file', (event) => {
+        console.log("get select music");
+        dialog.showOpenDialog({                                 // 使用electron 的選擇後的文件
+            properties: ["openFile", "multiSelections"],
+            filters: [{name: 'Music', extensions: ['mp3']}]
+        }).then(filesPath => {
+            // console.log(filesPath.filePaths);
+            event.sender.send('selected-file', filesPath.filePaths);   // 留意: 取filePaths才是array
+        }).catch(err => {
+            console.log(err)
+        })
     })
 });
