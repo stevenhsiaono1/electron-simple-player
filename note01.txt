@@ -13,3 +13,12 @@ https://www.electronjs.org/docs/api/browser-window
    如註解
 
 7. 開始撰寫撥放器
+8. ... 是ES6的擴展運算符
+9. 兩個窗口幾乎用相同代碼 >> 重構!來封裝吧~~ (用ES6 的class)
+可參考:https://ithelp.ithome.com.tw/articles/10195477
+10. ES6 的 Class 、super 的特例與繼承
+https://ithelp.ithome.com.tw/articles/10200658
+11. 優雅的顯示窗口, 當頁面在窗口中看到未完成的頁面不是很好的體驗>
+https://www.electronjs.org/docs/api/browser-window#%E4%BC%98%E9%9B%85%E5%9C%B0%E6%98%BE%E7%A4%BA%E7%AA%97%E5%8F%A3
+採用ready-to-show
+也就是改為ready-to-show事件完成後再來顯示窗口就不會閃爍
