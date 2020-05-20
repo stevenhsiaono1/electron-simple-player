@@ -1,4 +1,8 @@
 const {app, BrowserWindow, ipcMain, dialog} = require('electron')
+const DataStore = require('./renderer/MusicDataStore')
+
+// 初始化DataStore
+const myStore = new DataStore({'name':'MediaData'})  // 初始化的setting 可參考文件> 此為data存放檔名 
 
 // 封裝原本兩個BrowserWindow
 class AppWindow extends BrowserWindow{
@@ -30,6 +34,10 @@ class AppWindow extends BrowserWindow{
 app.on('ready', () =>{
     // 下方mainWindow改為以下
     const mainWindow = new AppWindow({},'./renderer/index.html')
+    // 因為這裡也需要帶出列表>> 可使用webContent did-finish-load事件
+    mainWindow.webContents.on('did-finish-load', () => {
+        mainWindow.send('getTracks', myStore.getTracks())    // 和添加完音樂欲渲染的事件相同!  差在夾帶不同內容
+    })
 
     // const mainWindow = new BrowserWindow({
     //     width: 800,
@@ -70,9 +78,21 @@ app.on('ready', () =>{
             filters: [{name: 'Music', extensions: ['mp3']}]
         }).then(filesPath => {
             // console.log(filesPath.filePaths);
-            event.sender.send('selected-file', filesPath.filePaths);   // 留意: 取filePaths才是array
+            event.sender.send('selected-file', filesPath.filePaths);   // 留意: 取filePaths才是array(可下console.log看) 轉成array較單純~~
         }).catch(err => {
             console.log(err)
         })
     })
+
+    //監聽選好的檔
+    ipcMain.on('add-tracks', (event, tracks) => {
+        // console.log(tracks)
+        // 收到後存到DataStore
+        const updatedTracks = myStore.addTracks(tracks).getTracks()    // add後同時也存於檔案
+        // console.log(updatedTracks)
+        // 接下來將update後的tracks供mainWindow渲染, 另外第一次進mainWindow也需要帶出渲染，更新於建立mainWindow後
+        mainWindow.send('getTracks', updatedTracks)
+
+
+    }) 
 });

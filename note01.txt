@@ -25,14 +25,25 @@ https://www.electronjs.org/docs/api/browser-window#%E4%BC%98%E9%9B%85%E5%9C%B0%E
 12. document.getElementById 可以寫個helper改用$取代然後export
 13. showOpenDialog
 https://www.electronjs.org/docs/api/dialog
-(留意  以為promise寫法>>  用.then)
+(留意  因為promise物件寫法>>  用.then)
 14.
 path.basename:指返回檔名沒有全路徑!!
 15. 數據持久化  (可持續使用)
 本sample 利用文件~  使用electron-store!  (預期可以測試，添加完後  關視窗下次還是會有該檔案)
+留意:  儲存路徑by 系統不同: (https://medium.com/cameron-nokes/how-to-store-user-data-in-electron-3ba6bf66bc1e)
+Where should I store the data?
+Typically data is stored in the user’s “app data” folder.
+Where this directory is varies by operating system.
+Mac OS: ~/Library/Application Support/<Your App Name (taken from the name property in package.json)>
+Windows: C:\Users\<you>\AppData\Local\<Your App Name>
+Linux: ~/.config/<Your App Name>
+
 16. 想為每一筆創建獨立的id:  可用node第三方uuid >> npm install uuid --save
-
-
+17. return 'this'  所以就可以用鏈式調用~~  因為有this指標，可參考自建之DataStore之saveTracks()
+文章可參考: https://kknews.cc/zh-tw/code/6k6899q.html
+18. 渲染初始頁面&選檔案後>  都要重新渲染index
+19. boostrap 的 flex (align-items-center, justify-content 等可以方便垂直置中等)
+20. 因mainWindow一開始也需要帶出electron-store的列表>>  可參考webContents的事件: 'did-finish-load'
 
 ************
 測試想法:  (Sunny:用robotframework + customized .py lib)
