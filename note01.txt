@@ -30,13 +30,13 @@ https://www.electronjs.org/docs/api/dialog
 path.basename:指返回檔名沒有全路徑!!
 15. 數據持久化  (可持續使用)
 本sample 利用文件~  使用electron-store!  (預期可以測試，添加完後  關視窗下次還是會有該檔案)
-
+16. 想為每一筆創建獨立的id:  可用node第三方uuid >> npm install uuid --save
 
 
 
 ************
-測試想法:
+測試想法:  (Sunny:用robotframework + customized .py lib)
 1. 先測main/renderer觸發   關閉
 2. 新增一圖‧ 撥放 , 有跳出圖檔視窗> 關閉移除
 3. 新增一聲音 撥放 (圖案要改)  聲音不等於00:00
-4. 測試檔名儲存，新增圖或聲音>   關閉視窗重開>>  看是否還在並能持續播檔
+4. 測試檔名儲存，新增圖或聲音>   關閉視窗重開>>  看是否檔案還在並能持續開檔
