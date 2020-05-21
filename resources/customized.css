@@ -9,6 +9,26 @@
     border-color: #285e8e; 
 } */
 
+.top-logo{
+  /* color: #fff;
+  background-color: #51007A;
+  border-color: #51007A; */
+  display: block;
+  width: 100%;
+  border: none;
+  background-color: #51007A;
+  padding: 14px 28px;
+  font-size: 16px;
+  cursor: pointer;   
+  /* my: 指到官網! */
+  text-align: center;
+  color: #fff;
+}
+
+#tracksList .col-2 .fa-play:hover{
+  cursor: pointer;
+}
+
 
 .btn-primary {
   color: #fff;

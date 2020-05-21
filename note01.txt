@@ -44,6 +44,10 @@ Linux: ~/.config/<Your App Name>
 18. 渲染初始頁面&選檔案後>  都要重新渲染index
 19. boostrap 的 flex (align-items-center, justify-content 等可以方便垂直置中等)
 20. 因mainWindow一開始也需要帶出electron-store的列表>>  可參考webContents的事件: 'did-finish-load'
+21. icon 可參考 fontawesome
+22. HTMLAudio tag & HTMLAudioElement對象
+23. HTML 自定義屬性: data-*, JS 可用HTMLElement的dataset屬性讀取
+24. 若不要HTML原本屬性的功能，可用event.preventDefault()    例如onclick不想要跳轉之類的~
 
 ************
 測試想法:  (Sunny:用robotframework + customized .py lib)
@@ -51,3 +55,6 @@ Linux: ~/.config/<Your App Name>
 2. 新增一圖‧ 撥放 , 有跳出圖檔視窗> 關閉移除
 3. 新增一聲音 撥放 (圖案要改)  聲音不等於00:00
 4. 測試檔名儲存，新增圖或聲音>   關閉視窗重開>>  看是否檔案還在並能持續開檔
+5. 點擊上方官網 可先
+6. 設計loading圖觸發
+7. 設計返回鈕

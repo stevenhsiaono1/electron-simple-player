@@ -4,16 +4,22 @@
     <meta charset="UTF-8">
     <title>Player</title>
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css" integrity="sha384-Bfad6CLCknfcloXFOyFnlgtENryhrpZCe29RTifKEixXQZ38WheV+i/6YWSzkz3V" crossorigin="anonymous">
     <link rel="stylesheet" href="../resources/customized.css">
+    
   </head>
   
   <body>
+    <!-- <div class="top_logo" onclick="location.href='https://www.nzxt.com/';"><h1>NZXT Player</h1></div> -->
+    <div id="nzxt-page" class="top-logo"><h1>NZXT Player</h1></div>
 
     <div class="container mt-4">
-        <h1>NZXT Player</h1>
+        <!-- <h1>NZXT Player</h1> -->
         <button type="button" id="add-music-btn" class="btn btn-primary btn-lg btn-block mt-4">
             Add Music to List
         </button>
+        <div id="tracksList" class="mt-4">
+        </div>
     </div>
 
     <!-- 通常項目都是用script src = XXX，electron也沒有問題，但因為可以直接吃nodeJS>>  改用以下 -->

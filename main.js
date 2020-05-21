@@ -8,8 +8,8 @@ const myStore = new DataStore({'name':'MediaData'})  // 初始化的setting 可�
 class AppWindow extends BrowserWindow{
     constructor(config, fileLocation){
         const basicConfig = {
-            width: 800,
-            height: 600,
+            width: 1024,
+            height: 768,
             webPreferences:{
                 nodeIntegration: true,   // 如此在renderer.js可以調用nodejs的API
             }
@@ -35,6 +35,15 @@ app.on('ready', () =>{
     // 下方mainWindow改為以下
     const mainWindow = new AppWindow({},'./renderer/index.html')
     // 因為這裡也需要帶出列表>> 可使用webContent did-finish-load事件
+    ipcMain.on('open-nzxt-page', (event, tracks) => {
+        mainWindow.loadURL("https://www.nzxt.com/")
+    }) 
+
+    // 未來想拿來作轉圈圈~
+    // mainWindow.webContents.on('did-start-loading', () => {
+    //     console.log("SSSSPPPPPPINNNNNNN")    
+    // })
+
     mainWindow.webContents.on('did-finish-load', () => {
         mainWindow.send('getTracks', myStore.getTracks())    // 和添加完音樂欲渲染的事件相同!  差在夾帶不同內容
     })
@@ -92,7 +101,5 @@ app.on('ready', () =>{
         // console.log(updatedTracks)
         // 接下來將update後的tracks供mainWindow渲染, 另外第一次進mainWindow也需要帶出渲染，更新於建立mainWindow後
         mainWindow.send('getTracks', updatedTracks)
-
-
     }) 
 });
