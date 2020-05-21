@@ -64,12 +64,20 @@ $('tracksList').addEventListener('click', (event) => {
     const id = dataset && dataset.id
     // console.log(id)
     if(id && classList.contains('fa-play')){    // 欲進行播放
+        // 一開始要判斷是否已經正在播放之歌曲
+        // continue...
+        
+        
         // 開始播放音樂
         currentTrack = allTracks.find(track => track.id === id)
         musicAudio.src = currentTrack.path
         musicAudio.play()
         // 播放後改為暫停圖示
         classList.replace('fa-play', 'fa-pause-circle')
+    }else if(id && classList.contains('fa-pause-circle')){
+        // 處理暫停邏輯
+    }else if(id && classList.contains('fa-trash-alt')){
+        // 發送事件並處理刪除邏輯
     }
 
 
