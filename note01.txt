@@ -47,7 +47,12 @@ Linux: ~/.config/<Your App Name>
 21. icon 可參考 fontawesome
 22. HTMLAudio tag & HTMLAudioElement對象
 23. HTML 自定義屬性: data-*, JS 可用HTMLElement的dataset屬性讀取
+可自行console.log看event內的架構 (若有設定data-*, 可以看到event中的dataset有屬性值!)
 24. 若不要HTML原本屬性的功能，可用event.preventDefault()    例如onclick不想要跳轉之類的~
+25. ES6 Destructuring Assignment: 解構賦值: 可參考https://ithelp.ithome.com.tw/articles/10185430
+26. 重要> event.target等 https://ithelp.ithome.com.tw/articles/10192015
+(target 可以取得觸發事件的)
+27. classList 可以拿來return class內容
 
 ************
 測試想法:  (Sunny:用robotframework + customized .py lib)

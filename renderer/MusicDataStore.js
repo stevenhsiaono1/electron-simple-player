@@ -26,8 +26,8 @@ class DataStore extends Store {
             return {
                 // id可用第三方的uuid
                 id: uuidv4(),
-                path: track,
-                fileName: path.basename(track)
+                path: track,                                // 絕對路徑
+                fileName: path.basename(track)              // only 最後路徑
             }
         }).filter(track => { // 僅取目前data沒有的
             // 目前的path有哪些:

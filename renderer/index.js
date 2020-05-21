@@ -1,10 +1,9 @@
 const {ipcRenderer} = require('electron')
 const {$} = require('./helper')
 
-let musicAudio = new Audio
+let musicAudio = new Audio()
 let allTracks
 let currentTrack
-
 
 $('nzxt-page').addEventListener('click', () => {
     ipcRenderer.send('open-nzxt-page')
@@ -32,10 +31,12 @@ const renderListHTML = (tracks) => {
             </div>
 
             <div class="col-2">
-                <i class="fas fa-play mr-2 data-id="${track.id}"></i>
-                <i class="fa fa-trash-alt data-id="${track.id}"></i>
+                <i class="fas fa-play mr-2" data-id="${track.id}"></i> 
+                <i class="fa fa-trash-alt" data-id="${track.id}"></i>
             </div>
         </li>`   
+
+        // data--id是要客製化用來取得典籍哪個檔案的屬性 (event 再用dataset.id去取!)
 
         return html
     }, '')
@@ -53,6 +54,24 @@ ipcRenderer.on('getTracks', (event, tracks) => {
     renderListHTML(tracks)
 })
 
+// 監聽欲播放的事件
 $('tracksList').addEventListener('click', (event) => {
+    // console.log(event)    // 可以
     event.preventDefault
+    const {dataset, classList} = event.target    // 將event中的target(誰觸發此event)的dataset和classList值取出!
+    // console.log(dataset)
+    // console.log(dataset.id)
+    const id = dataset && dataset.id
+    // console.log(id)
+    if(id && classList.contains('fa-play')){    // 欲進行播放
+        // 開始播放音樂
+        currentTrack = allTracks.find(track => track.id === id)
+        musicAudio.src = currentTrack.path
+        musicAudio.play()
+        // 播放後改為暫停圖示
+        classList.replace('fa-play', 'fa-pause-circle')
+    }
+
+
+
 })

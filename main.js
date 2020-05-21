@@ -35,7 +35,9 @@ app.on('ready', () =>{
     // 下方mainWindow改為以下
     const mainWindow = new AppWindow({},'./renderer/index.html')
     // 因為這裡也需要帶出列表>> 可使用webContent did-finish-load事件
-    ipcMain.on('open-nzxt-page', (event, tracks) => {
+    
+    // 開啟公司官網(也可以考慮開新window!)
+    ipcMain.on('open-nzxt-page', () => {
         mainWindow.loadURL("https://www.nzxt.com/")
     }) 
 
