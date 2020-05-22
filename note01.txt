@@ -88,6 +88,10 @@ npm install electron-builder --save-dev
   }
 
 3. ico自行製作
+
+4. 打包語法>> (pack為打包成執行檔,)  
+輸入npm run pack
+輸入npm run dist  
 ************
 測試想法:  (Sunny:用robotframework + customized .py lib)
 1. 先測main/renderer觸發   關閉
