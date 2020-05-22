@@ -4,7 +4,9 @@
   "description": "A minimal Electron application",
   "main": "main.js",
   "scripts": {
-    "start": "nodemon --watch main.js --exec electron ."
+    "start": "nodemon --watch main.js --exec electron .",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
   },
   "repository": "https://github.com/electron/electron-quick-start",
   "keywords": [
@@ -18,11 +20,29 @@
   "license": "CC0-1.0",
   "devDependencies": {
     "electron": "^8.3.0",
+    "electron-builder": "^22.6.1",
     "nodemon": "^2.0.4"
   },
   "dependencies": {
     "bootstrap": "^4.5.0",
     "electron-store": "^5.1.1",
     "uuid": "^8.0.0"
+  },
+  "@comment build": "以下是build code設定",
+  "build": {
+    "appId": "com.cilent.app.electronbuild",
+    "productName": "electron-simple-player",
+    "directories": {
+      "output": "build"
+    },
+    "mac": {
+      "icon": "icons/Mushroom.ico"
+    },
+    "win": {
+      "icon": "icons/Mushroom.ico"
+    },
+    "linux": {
+      "icon": "icons/Mushroom.ico"
+    }
   }
 }

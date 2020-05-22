@@ -53,11 +53,41 @@ Linux: ~/.config/<Your App Name>
 26. 重要> event.target等 https://ithelp.ithome.com.tw/articles/10192015
 (target 可以取得觸發事件的)
 27. classList 可以拿來return class內容
-28. 點擊:
+28. 點擊:  (未完成!)
 (1) 播放圖: 是否是正在播放之歌曲:  是:繼續播放當前音樂, 否:播放新歌，且同時將其他的音樂圖標的暫停圖示改掉   
 (2) 暫停圖: 暫停當前音樂
 (3) 刪除圖: 發送事件刪除音樂  (撈取store時取消該id並重新Save)
     
+************
+打包方式:
+1. 我採用 electron-builder 較為方便!
+npm install electron-builder --save-dev
+
+2. 方式很簡單:   只要在package.json加入
+(1). Script 新增內容如以下 
+  "scripts": {
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
+  },
+(2). build在dependencies增加如以下
+  "build": {
+    "appId": "com.cilent.app.electronbuild",
+    "productName": "electron-simple-player",
+    "directories": {
+      "output": "build"
+    },
+    "mac": {
+      "icon": "icons/Mushroom.ico"
+    },
+    "win": {
+      "icon": "icons/Mushroom.ico"
+    },
+    "linux": {
+      "icon": "icons/Mushroom.ico"
+    }
+  }
+
+
 ************
 測試想法:  (Sunny:用robotframework + customized .py lib)
 1. 先測main/renderer觸發   關閉
