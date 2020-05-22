@@ -36,13 +36,13 @@
       "output": "build"
     },
     "mac": {
-      "icon": "icons/Mushroom.ico"
+      "icon": "icons/NZXT.ico"
     },
     "win": {
-      "icon": "icons/Mushroom.ico"
+      "icon": "icons/NZXT.ico"
     },
     "linux": {
-      "icon": "icons/Mushroom.ico"
+      "icon": "icons/NZXT.ico"
     }
   }
 }

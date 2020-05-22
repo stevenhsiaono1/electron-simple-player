@@ -62,7 +62,7 @@ Linux: ~/.config/<Your App Name>
 打包方式:
 1. 我採用 electron-builder 較為方便!
 npm install electron-builder --save-dev
-
+(參考https://a091234765.pixnet.net/blog/post/402450719-%5Belectron%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98%5Delectron%E5%AE%89%E8%A3%9D%E6%AA%94%E6%89%93%E5%8C%85%E6%94%BB%E7%95%A5%E8%A3%9C%E5%85%85_el)
 2. 方式很簡單:   只要在package.json加入
 (1). Script 新增內容如以下 
   "scripts": {
@@ -87,7 +87,7 @@ npm install electron-builder --save-dev
     }
   }
 
-
+3. ico自行製作
 ************
 測試想法:  (Sunny:用robotframework + customized .py lib)
 1. 先測main/renderer觸發   關閉
@@ -97,4 +97,7 @@ npm install electron-builder --save-dev
 5. 點擊上方官網 可先
 6. 設計loading圖觸發
 7. 設計返回鈕
-8. (1) 播放:  是否是正在播放之歌曲:  是:繼續播放當前音樂, 否:播放新歌，且同時將其他的音樂圖標的暫停圖示改掉   (可測試!!)
+8. 
+(1) 播放:  是否是正在播放之歌曲:  是:繼續播放當前音樂, 否:播放新歌，且同時將其他的音樂圖標的暫停圖示改掉   (可測試!!)
+(2) 補
+9. 小巧思分享: icon 採用公司 LOGO
