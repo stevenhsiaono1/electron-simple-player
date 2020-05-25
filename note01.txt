@@ -92,6 +92,21 @@ npm install electron-builder --save-dev
 4. 打包語法>> (pack為打包成執行檔,)  
 輸入npm run pack
 輸入npm run dist  
+
+5. 因robot framework異常 無法連接electron >  這邊測試使用spectron+mocha
+專案需放chromedriver
+npm install --save-dev spectron
+npm i mocha -D
+新增test/XXX.js
+貼上https://github.com/electron-userland/spectron 的內容
+path: electronPath, 修改為build code的檔
+package新增 
+"scripts": {
+  "test": "mocha"
+}
+
+(留意spectron, mocha, electron版本關係)
+
 ************
 測試想法:  (Sunny:用robotframework + customized .py lib)
 1. 先測main/renderer觸發   關閉
