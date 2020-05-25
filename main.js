@@ -11,7 +11,8 @@ class AppWindow extends BrowserWindow{
             width: 1024,
             height: 768,
             webPreferences:{
-                nodeIntegration: true,   // 如此在renderer.js可以調用nodejs的API
+                nodeIntegration: true   // 如此在renderer.js可以調用nodejs的API
+                // devTools: false
             }
         }
 

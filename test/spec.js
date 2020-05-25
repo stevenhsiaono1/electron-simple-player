@@ -1,62 +1,117 @@
 const Application = require('spectron').Application
-const assert = require('assert')
-const electronPath = require('electron') // Require Electron from the binaries included in node_modules.
+// const assert = require('assert')
+// const electronPath = require('electron') // Require Electron from the binaries included in node_modules.
 const path = require('path')
 
-describe('Application launch', function () {
-  this.timeout(10000)
+var chai = require('chai')
+const assert = chai.assert;
+const { expect } = require('chai');
+
+// describe('Application launch', function () {
+//   this.timeout(10000)
 
 
-  beforeEach(function () {
-    this.app = new Application({
+//   beforeEach(function () {
+//     this.app = new Application({
 
-      // Your electron path can be any binary
-      // i.e for OSX an example path could be '/Applications/MyApp.app/Contents/MacOS/MyApp'
-      // But for the sake of the example we fetch it from our node_modules.
+//       // Your electron path can be any binary
+//       // i.e for OSX an example path could be '/Applications/MyApp.app/Contents/MacOS/MyApp'
+//       // But for the sake of the example we fetch it from our node_modules.
       
-    //   path: electronPath,
-        path: "./build/win-unpacked/electron-simple-player.exe",
-        
-      // Assuming you have the following directory structure
+//     //   path: electronPath,
+//         path: "./build/win-unpacked/electron-simple-player.exe",
 
-      //  |__ my project
-      //     |__ ...
-      //     |__ main.js
-      //     |__ package.json
-      //     |__ index.html
-      //     |__ ...
-      //     |__ test
-      //        |__ spec.js  <- You are here! ~ Well you should be.
+//       // Assuming you have the following directory structure
 
-      // The following line tells spectron to look and use the main.js file
-      // and the package.json located 1 level above.
-      args: [path.join(__dirname, '..')]
-    })
-    return this.app.start()
-  })
+//       //  |__ my project
+//       //     |__ ...
+//       //     |__ main.js
+//       //     |__ package.json
+//       //     |__ index.html
+//       //     |__ ...
+//       //     |__ test
+//       //        |__ spec.js  <- You are here! ~ Well you should be.
 
-  afterEach(function () {
-    if (this.app && this.app.isRunning()) {
-      return this.app.stop()
-    }
-  })
+//       // The following line tells spectron to look and use the main.js file
+//       // and the package.json located 1 level above.
+//       args: [path.join(__dirname, '..')]
+//     })
+//     return this.app.start()
+//   })
 
-  it('shows an initial window', function () {
-    
-    return this.app.client.getWindowCount().then(function (count) {
-      assert.equal(count, 1)
-      // Please note that getWindowCount() will return 2 if `dev tools` are opened.
-      // assert.equal(count, 2)
-    })
-  })
+//   afterEach(function () {
+//     if (this.app && this.app.isRunning()) {
+//       return this.app.stop()
+//     }
+//   })
 
-  it('shows an initial window', function () {
-    
-    return this.app.client.getWindowCount().then(function (count) {
-      assert.equal(count, 1)
-      // Please note that getWindowCount() will return 2 if `dev tools` are opened.
-      // assert.equal(count, 2)
-    })
-  })
+
+//   it('shows an initial window', function () {
+//     return this.app.client.getWindowCount().then(function (count) {
+//       assert.equal(count, 1)
+//       // Please note that getWindowCount() will return 2 if `dev tools` are opened.
+//       // assert.equal(count, 2)
+//     })
+//   })
   
-})
+// })
+
+
+const app = new Application({
+  path: "./build/win-unpacked/electron-simple-player.exe",
+  args: [path.join(__dirname, '..')],
+});
+
+
+describe('Application launch', function () {
+  this.timeout(10000);
+
+  beforeEach(() => {
+    return app.start();
+  });
+
+  afterEach(() => {
+    if (app && app.isRunning()) {
+      return app.stop();
+    }
+  });
+
+  // OK
+  it('shows an initial window', async () => {
+    const count = await app.client.getWindowCount();
+    return assert.equal(count, 1);
+  });  
+});
+
+
+describe('Basic Flow', function () {
+  // 時間較長避免timeout
+  this.timeout(50000);                              
+
+  beforeEach(() => {
+    return app.start();
+  });
+
+  afterEach(() => {
+    if (app && app.isRunning()) {
+      return app.stop();
+    }
+  });
+
+  // OK 256ms
+  it('Check application name', async () => {
+    const title = await app.client.waitUntilWindowLoaded().getTitle();
+    return assert.equal(title, 'Player');
+  });
+
+  // OK 12604ms
+  it('Main Logo to Official Website & Check Intro Text', async() => {
+    await app.client.waitUntilWindowLoaded();
+    await app.client.click('#nzxt-page');
+    const mainIntro = await app.client.getText('//*[@id="overflow-hidden"]/section[1]/div[3]/div/div[2]/h1')
+    return assert.equal(mainIntro, '為電腦玩家與組裝者打造的機殼、散熱器材與配件。');  
+  });
+
+});
+
+
