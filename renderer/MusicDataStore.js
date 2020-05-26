@@ -27,7 +27,8 @@ class DataStore extends Store {
                 // id可用第三方的uuid
                 id: uuidv4(),
                 path: track,                                // 絕對路徑
-                fileName: path.basename(track)              // only 最後路徑
+                fileName: path.basename(track),              // only 最後路徑
+                fileType: path.basename(track).split('.').pop()
             }
         }).filter(track => { // 僅取目前data沒有的
             // 目前的path有哪些:
@@ -36,6 +37,12 @@ class DataStore extends Store {
         })
 
         this.tracks = [...this.tracks, ...tracksWithProps]
+        return this.saveTracks()
+    }
+
+
+    deleteTrack(deleteId){
+        this.tracks = this.tracks.filter(item => item.id !== deleteId)
         return this.saveTracks()
     }
 }

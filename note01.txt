@@ -111,7 +111,7 @@ package新增
 測試想法:  (Sunny:用robotframework + customized .py lib)
 1. 先測main/renderer觸發   關閉
 2. 新增一圖‧ 撥放 , 有跳出圖檔視窗> 關閉移除
-3. 新增一聲音 撥放 (圖案要改)  聲音不等於00:00
+3. 新增一聲音 撥放 (圖案要改)  聲音不等於00:00   
 4. 測試檔名儲存，新增圖或聲音>   關閉視窗重開>>  看是否檔案還在並能持續開檔
 5. 點擊上方官網 可先
 6. 設計loading圖觸發
@@ -120,9 +120,11 @@ package新增
 (1) 播放:  是否是正在播放之歌曲:  是:繼續播放當前音樂, 否:播放新歌，且同時將其他的音樂圖標的暫停圖示改掉   (可測試!!)
 (2) 補
 9. 小巧思分享: icon 採用公司 LOGO
+10. demo 前劃好程式流程心智圖~!
 
 
-
+******************************
+測試期間發生問題&教學
 (在win發現會開啟很多command window >> 應為.bat所造成  會嘗試解決)
 (1)https://github.com/electron-userland/spectron/tree/984905ca1468330d8b42f7b14eb320b10fdf1389/test
 (2)新增chai:
@@ -130,3 +132,6 @@ package新增
 (3) 使用webIO: https://webdriver.io/docs/api/element/click.html
 (4) 不錯的spectron + mocha教學: https://livebook.manning.com/book/electron-in-action/chapter-13/59
 (ES6 出現了 promise，ES7 出現了 async、await)
+(5) 測試選黨(electron的dialog) 研究中: https://github.com/electron-userland/spectron/issues/23
+後來文章是建議用dialog  但webdriver類的似乎還無法做這麼完善(除非是inpu file)  >>  可以再研究
+(6) 測試音樂或圖片如何確定是對的音樂  是思考方向

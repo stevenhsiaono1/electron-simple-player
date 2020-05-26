@@ -66,7 +66,7 @@ app.on('ready', () =>{
         console.log("receive add")
 
         // 以下監聽到後創建的window也改用封裝
-        const addWindow = new AppWindow({
+        let addWindow = new AppWindow({
                 width: 600,
                 height: 400,
                 parent:mainWindow
@@ -87,7 +87,10 @@ app.on('ready', () =>{
         console.log("get select music");
         dialog.showOpenDialog({                                 // 使用electron 的選擇後的文件
             properties: ["openFile", "multiSelections"],
-            filters: [{name: 'Music', extensions: ['mp3']}]
+            filters: [
+                {name: 'Music', extensions: ['mp3']},
+                { name: 'Images', extensions: ['jpg', 'png', 'gif'] }
+            ]
         }).then(filesPath => {
             // console.log(filesPath.filePaths);
             event.sender.send('selected-file', filesPath.filePaths);   // 留意: 取filePaths才是array(可下console.log看) 轉成array較單純~~
@@ -105,4 +108,10 @@ app.on('ready', () =>{
         // 接下來將update後的tracks供mainWindow渲染, 另外第一次進mainWindow也需要帶出渲染，更新於建立mainWindow後
         mainWindow.send('getTracks', updatedTracks)
     }) 
+
+    ipcMain.on('delete-track', (event, id) => {
+        const updatedTracks = myStore.deleteTrack(id).getTracks()
+        mainWindow.send('getTracks', updatedTracks)
+    })
+
 });
