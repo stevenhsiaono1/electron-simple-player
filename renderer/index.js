@@ -42,7 +42,7 @@ const renderListHTML = (tracks) => {
 
     const emptyTrackHTML = `<div class="alert alert-primary">No Music on List!</div>`
 
-    trackList.innerHTML = tracks.length ? `<ul class="list-group">${tracksListHTML}</ul>` : emptyTrackHTML
+    trackList.innerHTML = tracks.length ? `<ul class="list-group" style="height: 300px; overflow-y: auto; overflow-x: hidden;">${tracksListHTML}</ul>` : emptyTrackHTML
 }
 
 

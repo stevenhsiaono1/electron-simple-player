@@ -62,15 +62,16 @@ app.on('ready', () =>{
     // mainWindow.loadFile('./renderer/index.html');
 
     // ipcMain監聽
+    let addWindow
     ipcMain.on('add-music-window', () => {
         console.log("receive add")
 
         // 以下監聽到後創建的window也改用封裝
-        let addWindow = new AppWindow({
-                width: 600,
-                height: 400,
-                parent:mainWindow
-            }, './renderer/add.html')
+        addWindow = new AppWindow({
+            width: 600,
+            height: 400,
+            parent:mainWindow
+        }, './renderer/add.html')
 
         // const addWindow = new BrowserWindow({
         //     width: 500,
@@ -107,6 +108,8 @@ app.on('ready', () =>{
         // console.log(updatedTracks)
         // 接下來將update後的tracks供mainWindow渲染, 另外第一次進mainWindow也需要帶出渲染，更新於建立mainWindow後
         mainWindow.send('getTracks', updatedTracks)
+        addWindow.close()               // 關閉add window
+        mainWindow.show()               // 重show mainwindow (可能有更好做法?   可再研究)
     }) 
 
     ipcMain.on('delete-track', (event, id) => {
