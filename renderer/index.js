@@ -13,6 +13,7 @@ $('add-music-btn').addEventListener('click', ()=>{
     ipcRenderer.send('add-music-window')
 })
 
+
 // document.getElementById('add-music-btn').addEventListener('click', ()=>{
 //     ipcRenderer.send('add-music-window')
 // })
@@ -40,7 +41,7 @@ const renderListHTML = (tracks) => {
         return html
     }, '')
 
-    const emptyTrackHTML = `<div class="alert alert-primary">No Music on List!</div>`
+    const emptyTrackHTML = `<div class="alert alert-primary">No Media on List!</div>`
 
     trackList.innerHTML = tracks.length ? `<ul class="list-group" style="height: 300px; overflow-y: auto; overflow-x: hidden;">${tracksListHTML}</ul>` : emptyTrackHTML
 }
@@ -65,7 +66,6 @@ const renderClosePlayerShowHTML = () => {
     const playerShowList = $('player-show')
     playerShowList.innerHTML = ``
 }
-
 
 
 // 拿到目前拿到的選單列表，包含初始mainWindow load完資料 & 選完檔案皆會呼叫此event
@@ -141,4 +141,11 @@ $('tracksList').addEventListener('click', (event) => {
         // 發送事件並處理刪除邏輯
         ipcRenderer.send('delete-track', id)
     }
+})
+
+
+$('delete-all-btn').addEventListener('click', ()=>{
+    musicAudio.load()
+    renderClosePlayerShowHTML()
+    ipcRenderer.send('delete-all-tracks')
 })

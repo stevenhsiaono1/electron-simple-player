@@ -117,4 +117,9 @@ app.on('ready', () =>{
         mainWindow.send('getTracks', updatedTracks)
     })
 
+    ipcMain.on('delete-all-tracks', (event) => {
+        const updatedTracks = myStore.deleteAllTrack().getTracks()
+        mainWindow.send('getTracks', updatedTracks)
+    })
+
 });
