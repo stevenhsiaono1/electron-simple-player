@@ -129,7 +129,7 @@ describe('Basic Flow', function () {
   //   await app.client.click('#add-music-btn');
   //   // switch to select window (could check by getCurrentTabId())
   //   await app.client.switchWindow('add.html')    
-  //   const selectMusic = await app.client.getText('#select-music')
+  //   const selectMusic = await app.client.getText('#select-media')
   //   assert.equal(selectMusic, 'Select Music');
   //   const addMusic = await app.client.getText('#add-music')
   //   assert.equal(addMusic, 'Confirm & Add');
@@ -159,12 +159,12 @@ describe('Music Control', function () {
     // switch to select window (could check by getCurrentTabId())
     await app.client.switchWindow('add.html')    
     
-    await app.client.waitForExist('#select-music')
-    await app.client.click('#select-music');
-    app.client.chooseFile('#select-music', '../resources/1.mp3')
+    await app.client.waitForExist('#select-media')
+    await app.client.click('#select-media');
+    app.client.chooseFile('#select-media', '../resources/1.mp3')
 
     await app.client.click('#add-music');
-    // await app.client.click('#select-music');
+    // await app.client.click('#select-media');
 
     // const musicItemsHTML = `<li class="list-group-item">1.mp3</li>`
 

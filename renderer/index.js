@@ -58,7 +58,7 @@ const renderPlayerShowHTML = (path) => {
 
     // const emptyTrackHTML = `<div class="alert alert-primary">No Music on List!</div>`
 
-    playerShowList.innerHTML = `<img src=${path} alt="Trulli" width="320" height="180" class="center"></img>`
+    playerShowList.innerHTML = `<img id="play-images" src=${path} alt="Trulli" width="320" height="180" class="center"></img>`
 }
 
 

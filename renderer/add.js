@@ -3,7 +3,7 @@ const {$} = require('./helper')
 const path = require('path')
 
 let musicFilesPath = []
-$('select-music').addEventListener('click', () => {
+$('select-media').addEventListener('click', () => {
     ipcRenderer.send('open-music-file')
 
 })
