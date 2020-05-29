@@ -13,7 +13,13 @@ $('add-music-btn').addEventListener('click', ()=>{
     ipcRenderer.send('add-music-window')
 })
 
-
+const getFileCategory = (fileType) => {
+    if(['jpg', 'png', 'gif'].includes(fileType))
+        return "image"
+    else if(['mp3'].includes(fileType)){
+        return "audio"
+    }
+}
 // document.getElementById('add-music-btn').addEventListener('click', ()=>{
 //     ipcRenderer.send('add-music-window')
 // })
@@ -22,21 +28,31 @@ $('add-music-btn').addEventListener('click', ()=>{
 // 將選取完檔案渲染mainWindow
 const renderListHTML = (tracks) => {
     const trackList = $('tracksList')
+    
+    tracks.forEach((track) => {
+        if(getFileCategory(track.fileType) === "image"){
+            track.typeLogoClass = "fas fa-image"
+        }
+        else{       // audio
+            track.typeLogoClass = "fas fa-headphones-alt"
+        }   
+    })
+    
     const tracksListHTML = tracks.reduce((html, track) => {
         // d-flex: 彈性配置容器   justify-content-* 排列方式  align-content-* 垂直堆疊元
         html += `<li class="row music-track list-group-item d-flex justify-content-between align-content-center>
-            <div class="col-10">
-                <i class="fas fa-headphones-alt mr-3 text-secondary">
-                    <b>${track.fileName}</b>
-                </i>
-            </div>
+                    <div class="col-10">
+                        <i class="${track.typeLogoClass} mr-3 text-secondary">
+                            &nbsp;
+                            <b>${track.fileName}</b>
+                        </i>
+                    </div>
 
-            <div class="col-2">
-                <i class="fas fa-play mr-2" data-id="${track.id}"></i> 
-                <i class="fa fa-trash-alt" data-id="${track.id}"></i>
-            </div>
-        </li>`   
-
+                    <div class="col-2">
+                        <i class="fas fa-play mr-2" data-id="${track.id}"></i> 
+                        <i class="fa fa-trash-alt" data-id="${track.id}"></i>
+                    </div>
+                    </li>`
         // data--id是要客製化用來取得典籍哪個檔案的屬性 (event 再用dataset.id去取!)
         return html
     }, '')
@@ -76,13 +92,7 @@ ipcRenderer.on('getTracks', (event, tracks) => {
 })
 
 
-const getFileCategory = (fileType) => {
-    if(['jpg', 'png', 'gif'].includes(fileType))
-        return "image"
-    else if(['mp3'].includes(fileType)){
-        return "audio"
-    }
-}
+
 
 
 // 監聽欲播放的事件

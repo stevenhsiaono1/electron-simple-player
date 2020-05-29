@@ -27,10 +27,8 @@ class AppWindow extends BrowserWindow{
         this.once('ready-to-show', () => {
             this.show()
         })
-
     }
 }
-
 
 app.on('ready', () =>{
     // 下方mainWindow改為以下

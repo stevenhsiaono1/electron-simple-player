@@ -5,7 +5,6 @@ const path = require('path')
 let musicFilesPath = []
 $('select-media').addEventListener('click', () => {
     ipcRenderer.send('open-music-file')
-
 })
 
 $('add-music').addEventListener('click', () => {
