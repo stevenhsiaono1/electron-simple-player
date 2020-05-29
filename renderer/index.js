@@ -64,7 +64,7 @@ const renderListHTML = (tracks) => {
 
 
 // 將選完圖檔渲染
-const renderPlayerShowHTML = (path) => {
+const renderImagePlayerShowHTML = (path) => {
     const playerShowList = $('player-show')
     // const playerShowListHTML = files.reduce((html, file) => {
     //     // d-flex: 彈性配置容器   justify-content-* 排列方式  align-content-* 垂直堆疊元
@@ -78,11 +78,24 @@ const renderPlayerShowHTML = (path) => {
 }
 
 
+
+// 將選完Audio檔渲染
+const renderAudioPlayerShowHTML = (name, duration) => {
+    const playerShowList = $('player-show')
+    const html = `<div class="col font-weight-bold">
+                    Now Playing: ${name}
+                  </div>
+                  <div class="col">
+                    <span id="current-seeker">00:00</span> / ${duration}
+                  </div>`
+
+    playerShowList.innerHTML = html
+}
+
 const renderClosePlayerShowHTML = () => {
     const playerShowList = $('player-show')
     playerShowList.innerHTML = ``
 }
-
 
 // 拿到目前拿到的選單列表，包含初始mainWindow load完資料 & 選完檔案皆會呼叫此event
 ipcRenderer.on('getTracks', (event, tracks) => {
@@ -91,9 +104,15 @@ ipcRenderer.on('getTracks', (event, tracks) => {
     renderListHTML(tracks)
 })
 
+musicAudio.addEventListener('loadedmetadata', () => {
+    // 渲染撥放器狀態
+    renderAudioPlayerShowHTML(currentTrack.fileName, musicAudio.duration)
 
+})
 
-
+musicAudio.addEventListener('timeupdate', () => {
+    // 更新撥放器狀態
+})
 
 // 監聽欲播放的事件
 $('tracksList').addEventListener('click', (event) => {
@@ -111,7 +130,7 @@ $('tracksList').addEventListener('click', (event) => {
         if(currentTrack && currentTrack.id === id){    
             // 表示點了先前暫停的歌曲繼續撥放
             if(getFileCategory(currentTrack.fileType) === "image"){    
-                renderPlayerShowHTML(currentTrack.path)
+                renderImagePlayerShowHTML(currentTrack.path)
             }
             else{   // 可再改寫
                 renderClosePlayerShowHTML()   
@@ -130,7 +149,7 @@ $('tracksList').addEventListener('click', (event) => {
             // 才開始播放音樂
             if(getFileCategory(currentTrack.fileType) === "image"){    
                 musicAudio.pause()
-                renderPlayerShowHTML(currentTrack.path)
+                renderImagePlayerShowHTML(currentTrack.path)
             }
             else{   // 可再改寫
                 renderClosePlayerShowHTML()
@@ -149,13 +168,18 @@ $('tracksList').addEventListener('click', (event) => {
         classList.replace('fa-pause', 'fa-play')
     }else if(id && classList.contains('fa-trash-alt')){
         // 發送事件並處理刪除邏輯
+        if(id === currentTrack.id){
+            musicAudio.pause()
+        }
         ipcRenderer.send('delete-track', id)
     }
 })
 
 
 $('delete-all-btn').addEventListener('click', ()=>{
-    musicAudio.load()
+    musicAudio.pause()
     renderClosePlayerShowHTML()
+    
+    
     ipcRenderer.send('delete-all-tracks')
 })

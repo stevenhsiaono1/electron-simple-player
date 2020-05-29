@@ -59,6 +59,9 @@ Linux: ~/.config/<Your App Name>
 (3) 刪除圖: 發送事件刪除音樂  (撈取store時取消該id並重新Save)
 29. 新增撥圖 (&影片todo)
 30. 新增scroll bar: ex, style="height: 500px; overflow: auto"
+31. Audio 什麼時候加載好 >> 可參考https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/loadedmetadata_event
+onloadedmetadata
+32. 撥放到的時間可以用timeuodate (ontimeupdate)
 
     
 ************
