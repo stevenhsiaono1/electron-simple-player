@@ -1,6 +1,5 @@
 const {app, BrowserWindow, ipcMain, dialog} = require('electron')
 const DataStore = require('./renderer/MusicDataStore')
-
 // 初始化DataStore
 const myStore = new DataStore({'name':'MediaData'})  // 初始化的setting 可參考文件> 此為data存放檔名 
 

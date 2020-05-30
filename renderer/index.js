@@ -1,5 +1,5 @@
 const {ipcRenderer} = require('electron')
-const {$} = require('./helper')
+const {$, convertDuration} = require('./helper')
 
 let musicAudio = new Audio()
 let allTracks
@@ -13,6 +13,8 @@ $('add-music-btn').addEventListener('click', ()=>{
     ipcRenderer.send('add-music-window')
 })
 
+
+// TODO: 檔型改寫為共用參數
 const getFileCategory = (fileType) => {
     if(['jpg', 'png', 'gif'].includes(fileType))
         return "image"
@@ -86,7 +88,7 @@ const renderAudioPlayerShowHTML = (name, duration) => {
                     Now Playing: ${name}
                   </div>
                   <div class="col">
-                    <span id="current-seeker">00:00</span> / ${duration}
+                    <span id="current-seeker">00:00</span> / ${convertDuration(duration)}
                   </div>`
 
     playerShowList.innerHTML = html
@@ -104,14 +106,19 @@ ipcRenderer.on('getTracks', (event, tracks) => {
     renderListHTML(tracks)
 })
 
+const updateProgressHTML = (currentTime) => {
+    const seeker = $('current-seeker')
+    seeker.innerHTML = convertDuration(currentTime)
+}
+
 musicAudio.addEventListener('loadedmetadata', () => {
     // 渲染撥放器狀態
     renderAudioPlayerShowHTML(currentTrack.fileName, musicAudio.duration)
-
 })
 
 musicAudio.addEventListener('timeupdate', () => {
-    // 更新撥放器狀態
+    // 更新撥放器狀態(預設以秒為單位)
+    updateProgressHTML(musicAudio.currentTime)
 })
 
 // 監聽欲播放的事件
@@ -135,8 +142,8 @@ $('tracksList').addEventListener('click', (event) => {
             else{   // 可再改寫
                 renderClosePlayerShowHTML()   
                 musicAudio.play()
+                renderAudioPlayerShowHTML(currentTrack.fileName, musicAudio.duration)
             }
-            
         }else{ 
             // 先還原其他圖標 & 再撥放新歌曲
             const resetIconElement = document.querySelector('.fa-pause')
@@ -145,7 +152,6 @@ $('tracksList').addEventListener('click', (event) => {
             }
 
             currentTrack = allTracks.find(track => track.id === id)
-
             // 才開始播放音樂
             if(getFileCategory(currentTrack.fileType) === "image"){    
                 musicAudio.pause()
@@ -170,6 +176,7 @@ $('tracksList').addEventListener('click', (event) => {
         // 發送事件並處理刪除邏輯
         if(id === currentTrack.id){
             musicAudio.pause()
+            renderClosePlayerShowHTML() 
         }
         ipcRenderer.send('delete-track', id)
     }
@@ -179,7 +186,5 @@ $('tracksList').addEventListener('click', (event) => {
 $('delete-all-btn').addEventListener('click', ()=>{
     musicAudio.pause()
     renderClosePlayerShowHTML()
-    
-    
     ipcRenderer.send('delete-all-tracks')
 })
