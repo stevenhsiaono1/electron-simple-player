@@ -62,7 +62,8 @@ Linux: ~/.config/<Your App Name>
 31. Audio 什麼時候加載好 >> 可參考https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/loadedmetadata_event
 onloadedmetadata
 32. 撥放到的時間可以用timeuodate (ontimeupdate)
-
+33. 進度條: bootstrap
+https://getbootstrap.com/docs/4.4/components/progress/
     
 ************
 打包方式:

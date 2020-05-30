@@ -84,19 +84,27 @@ const renderImagePlayerShowHTML = (path) => {
 // 將選完Audio檔渲染
 const renderAudioPlayerShowHTML = (name, duration) => {
     const playerShowList = $('player-show')
-    const html = `<div class="col font-weight-bold">
+    const playerStatus = $('player-bar')
+    const htmlShow = `<div class="col font-weight-bold">
                     Now Playing: ${name}
                   </div>
                   <div class="col">
                     <span id="current-seeker">00:00</span> / ${convertDuration(duration)}
                   </div>`
+    const htmlStatus = `<div class="progress"><div class="progress-bar bg-success" 
+            id="audio-progress" role="progressbar" style="width: 0%;">
+            0%
+            </div></div>`
 
-    playerShowList.innerHTML = html
+    playerShowList.innerHTML = htmlShow
+    playerStatus.innerHTML = htmlStatus
 }
 
 const renderClosePlayerShowHTML = () => {
     const playerShowList = $('player-show')
+    const bar = $('player-bar')
     playerShowList.innerHTML = ``
+    bar.innerHTML = ``
 }
 
 // 拿到目前拿到的選單列表，包含初始mainWindow load完資料 & 選完檔案皆會呼叫此event
@@ -106,9 +114,24 @@ ipcRenderer.on('getTracks', (event, tracks) => {
     renderListHTML(tracks)
 })
 
-const updateProgressHTML = (currentTime) => {
-    const seeker = $('current-seeker')
-    seeker.innerHTML = convertDuration(currentTime)
+const updateProgressHTML = (currentTime, duration) => {
+    // 避免因duration上為load成功出現NAN
+    // if(duration > 0){        
+    //     const progressPercent = Math.floor(currentTime / duration * 100)
+    //     const bar = $('audio-progress')
+    //     bar.innerHTML = progressPercent + "%"
+    //     bar.style.width = progressPercent + "%"
+    // }
+    
+    if(duration > 0){
+        const seeker = $('current-seeker')
+        seeker.innerHTML = convertDuration(currentTime)
+
+        const progressPercent = Math.floor(currentTime / duration * 100)
+        const bar = $('audio-progress')
+        bar.innerHTML = progressPercent + "%"
+        bar.style.width = progressPercent + "%"
+    }
 }
 
 musicAudio.addEventListener('loadedmetadata', () => {
@@ -118,7 +141,7 @@ musicAudio.addEventListener('loadedmetadata', () => {
 
 musicAudio.addEventListener('timeupdate', () => {
     // 更新撥放器狀態(預設以秒為單位)
-    updateProgressHTML(musicAudio.currentTime)
+    updateProgressHTML(musicAudio.currentTime, musicAudio.duration)
 })
 
 // 監聽欲播放的事件
@@ -167,10 +190,11 @@ $('tracksList').addEventListener('click', (event) => {
         // 播放後改為暫停圖示
         classList.replace('fa-play', 'fa-pause')
     }else if(id && classList.contains('fa-pause')){
-        // 圖片撥放取消
-        renderClosePlayerShowHTML()   
+        
         // 處理暫停邏輯
         musicAudio.pause()
+        // 撥放取消
+        renderClosePlayerShowHTML()   
         classList.replace('fa-pause', 'fa-play')
     }else if(id && classList.contains('fa-trash-alt')){
         // 發送事件並處理刪除邏輯
