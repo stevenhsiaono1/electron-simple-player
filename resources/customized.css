@@ -1,7 +1,14 @@
-#play-images {
+#play-images{
   border-radius: 12px;
 }
 
+#play-video{
+  position: relative;
+  width:"320" ;
+  height:"240";
+  /* border: 1px solid #51007A; */
+  overflow: hidden;
+}
 
 .top-logo{
   /* color: #fff;

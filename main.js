@@ -87,7 +87,8 @@ app.on('ready', () =>{
             properties: ["openFile", "multiSelections"],
             filters: [
                 {name: 'Music', extensions: ['mp3']},
-                { name: 'Images', extensions: ['jpg', 'png', 'gif'] }
+                { name: 'Images', extensions: ['jpg', 'png', 'gif'] },
+                {name: 'Video', extensions:['mp4']}
             ]
         }).then(filesPath => {
             // console.log(filesPath.filePaths);
