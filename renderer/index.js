@@ -1,5 +1,5 @@
 const {ipcRenderer} = require('electron')
-const {$, convertDuration, getSupportVideoTypes} = require('./helper')
+const {$, convertDuration, getSupportVideoTypes, getSupportImageTypes, getSupportAudioTypes} = require('./helper')
 
 let musicAudio = new Audio()
 let allTracks
@@ -16,9 +16,9 @@ $('add-music-btn').addEventListener('click', ()=>{
 
 // TODO: 檔型改寫為共用參數
 const getFileCategory = (fileType) => {
-    if(['jpg', 'png', 'gif'].includes(fileType))
+    if(getSupportImageTypes().includes(fileType))
         return "image"
-    else if(['mp3'].includes(fileType)){
+    else if(getSupportAudioTypes().includes(fileType)){
         return "audio"
     }
     else if(getSupportVideoTypes().includes(fileType)){
@@ -41,10 +41,9 @@ const renderListHTML = (tracks) => {
         else if(getFileCategory(track.fileType) === "audio"){       // audio
             track.typeLogoClass = "fas fa-headphones-alt"
         }
-        // else if(getFileCategory(track.fileType) === "video"){       // video
-        //     track.typeLogoClass = "fas fa-headphones-alt"
-        // }
-
+        else if(getFileCategory(track.fileType) === "video"){       // video
+            track.typeLogoClass = "fas fa-video"
+        }
     })
     
     const tracksListHTML = tracks.reduce((html, track) => {

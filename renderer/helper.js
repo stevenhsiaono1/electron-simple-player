@@ -12,3 +12,11 @@ exports.convertDuration = (time) => {
 exports.getSupportVideoTypes = () => {
     return ['mp4']
 }
+
+exports.getSupportAudioTypes = () => {
+    return ['mp3']
+}
+
+exports.getSupportImageTypes = () => {
+    return ['jpg', 'png', 'gif']
+}

@@ -2,7 +2,7 @@ const {app, BrowserWindow, ipcMain, dialog} = require('electron')
 const DataStore = require('./renderer/MusicDataStore')
 // 初始化DataStore
 const myStore = new DataStore({'name':'MediaData'})  // 初始化的setting 可參考文件> 此為data存放檔名 
-
+const {getSupportVideoTypes, getSupportImageTypes, getSupportAudioTypes} = require('./renderer/helper')
 // 封裝原本兩個BrowserWindow
 class AppWindow extends BrowserWindow{
     constructor(config, fileLocation){
@@ -86,9 +86,9 @@ app.on('ready', () =>{
         dialog.showOpenDialog({                                 // 使用electron 的選擇後的文件
             properties: ["openFile", "multiSelections"],
             filters: [
-                {name: 'Music', extensions: ['mp3']},
-                { name: 'Images', extensions: ['jpg', 'png', 'gif'] },
-                {name: 'Video', extensions:['mp4']}
+                {name: 'Audio', extensions: getSupportAudioTypes()},
+                { name: 'Image', extensions: getSupportImageTypes() },
+                {name: 'Video', extensions: getSupportVideoTypes()}
             ]
         }).then(filesPath => {
             // console.log(filesPath.filePaths);
