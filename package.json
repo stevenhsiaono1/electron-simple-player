@@ -31,6 +31,7 @@
     "chai": "^4.2.0",
     "electron-store": "^5.1.1",
     "save-dev": "0.0.1-security",
+    "spectron": "^11.0.0",
     "uuid": "^8.0.0"
   },
   "@comment build": "以下是build code設定",

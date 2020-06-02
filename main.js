@@ -60,7 +60,7 @@ app.on('ready', () =>{
 
     // ipcMain監聽
     let addWindow
-    ipcMain.on('add-music-window', () => {
+    ipcMain.on('add-media-window', () => {
         console.log("receive add")
 
         // 以下監聽到後創建的window也改用封裝
@@ -81,8 +81,8 @@ app.on('ready', () =>{
         // addWindow.loadFile('./renderer/add.html');
     })
 
-    ipcMain.on('open-music-file', (event) => {
-        console.log("get select music");
+    ipcMain.on('open-media-file', (event) => {
+        console.log("get select media");
         dialog.showOpenDialog({                                 // 使用electron 的選擇後的文件
             properties: ["openFile", "multiSelections"],
             filters: [

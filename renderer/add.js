@@ -4,10 +4,10 @@ const path = require('path')
 
 let musicFilesPath = []
 $('select-media').addEventListener('click', () => {
-    ipcRenderer.send('open-music-file')
+    ipcRenderer.send('open-media-file')
 })
 
-$('add-music').addEventListener('click', () => {
+$('add-media').addEventListener('click', () => {
     ipcRenderer.send('add-tracks', musicFilesPath)                  // 將以選擇的新的path帶入
 })
 

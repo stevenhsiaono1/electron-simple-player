@@ -9,8 +9,8 @@ $('nzxt-page').addEventListener('click', () => {
     ipcRenderer.send('open-nzxt-page')
 })
 
-$('add-music-btn').addEventListener('click', ()=>{
-    ipcRenderer.send('add-music-window')
+$('add-media-btn').addEventListener('click', ()=>{
+    ipcRenderer.send('add-media-window')
 })
 
 
@@ -25,8 +25,8 @@ const getFileCategory = (fileType) => {
         return "video"
     }
 }
-// document.getElementById('add-music-btn').addEventListener('click', ()=>{
-//     ipcRenderer.send('add-music-window')
+// document.getElementById('add-media-btn').addEventListener('click', ()=>{
+//     ipcRenderer.send('add-media-window')
 // })
 
 
