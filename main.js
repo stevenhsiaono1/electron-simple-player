@@ -87,7 +87,7 @@ app.on('ready', () =>{
             properties: ["openFile", "multiSelections"],
             filters: [
                 {name: 'Audio', extensions: getSupportAudioTypes()},
-                { name: 'Image', extensions: getSupportImageTypes() },
+                {name: 'Image', extensions: getSupportImageTypes() },
                 {name: 'Video', extensions: getSupportVideoTypes()}
             ]
         }).then(filesPath => {
@@ -119,5 +119,4 @@ app.on('ready', () =>{
         const updatedTracks = myStore.deleteAllTrack().getTracks()
         mainWindow.send('getTracks', updatedTracks)
     })
-
 });

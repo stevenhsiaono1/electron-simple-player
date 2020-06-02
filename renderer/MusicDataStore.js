@@ -49,7 +49,6 @@ class DataStore extends Store {
         this.tracks = []
         return this.saveTracks()
     }
-
 }
 
 module.exports = DataStore

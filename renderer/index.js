@@ -14,7 +14,6 @@ $('add-media-btn').addEventListener('click', ()=>{
 })
 
 
-// TODO: 檔型改寫為共用參數
 const getFileCategory = (fileType) => {
     if(getSupportImageTypes().includes(fileType))
         return "image"
@@ -33,7 +32,7 @@ const getFileCategory = (fileType) => {
 // 將選取完檔案渲染mainWindow
 const renderListHTML = (tracks) => {
     const trackList = $('tracksList')
-    
+    // 每個track的logo assign
     tracks.forEach((track) => {
         if(getFileCategory(track.fileType) === "image"){
             track.typeLogoClass = "fas fa-image"
@@ -61,7 +60,7 @@ const renderListHTML = (tracks) => {
                         <i class="fa fa-trash-alt" data-id="${track.id}"></i>
                     </div>
                     </li>`
-        // data--id是要客製化用來取得典籍哪個檔案的屬性 (event 再用dataset.id去取!)
+        // data--id是要客製化用來取得點擊哪個檔案的屬性 (event 再用dataset.id去取!)
         return html
     }, '')
 
@@ -83,7 +82,6 @@ const renderImagePlayerShowHTML = (path) => {
     // }, '')
 
     // const emptyTrackHTML = `<div class="alert alert-primary">No Music on List!</div>`
-
     playerShowList.innerHTML = `<img id="play-images" src=${path} alt="Trulli" width="320" height="180" class="center"></img>`
 }
 
@@ -165,7 +163,6 @@ $('tracksList').addEventListener('click', (event) => {
     if(id && classList.contains('fa-play')){     // 欲進行播放
         // 一開始要判斷是否已經正在播放之歌曲
         // 但要判斷是當前還是新歌
-
         if(currentTrack && currentTrack.id === id){    
             // 表示點了先前暫停的歌曲繼續撥放
             if(getFileCategory(currentTrack.fileType) === "image"){    
